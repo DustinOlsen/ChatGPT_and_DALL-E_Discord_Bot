@@ -13,7 +13,7 @@ class DALLe_Image_Bot:
     def dalleCall(self, prompt, count):
         imageOutput = openai.Image.create(
             prompt=prompt,
-            n=count,
+            n=1,
             size="1024x1024"
         )
         # print(imageOutput)
