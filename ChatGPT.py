@@ -1,0 +1,2 @@
+class ChatGPT:
+    name = "ChatGPT"
