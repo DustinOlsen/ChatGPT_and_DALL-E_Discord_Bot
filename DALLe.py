@@ -10,7 +10,7 @@ class DALLe_Image_Bot:
     def __init__(self):
         self.image_url = ""
 
-    def dalleCall(self, prompt, count):
+    def dalleCall(self, prompt):
         imageOutput = openai.Image.create(
             prompt=prompt,
             n=1,

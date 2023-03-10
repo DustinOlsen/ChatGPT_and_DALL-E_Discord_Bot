@@ -2,21 +2,44 @@ import os
 import openai
 import dotenv
 
+
 dotenv.load_dotenv()
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
+testBot = True
+
+conversation = [
+    {"role": "system", "content": "You are VEGA, the sentient intelligence assigned to Mars."}
+]
+
+
 def gptCall(chatInput):
     global contentOutput
+    global conversation
+
+    # messages = conversation + [{"role": "user", "content": chatInput}]
+    conversation.append({"role": "user", "content": chatInput})
 
     completion = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
-        messages=[
-            {"role": "user", "content": chatInput}
-        ]
+        messages=conversation
     )
-    print(completion.choices[0].message.content)
+
+    response = completion.choices[0].message.content
+    print(response)
+
     contentOutput = completion.choices[0].message.content
 
+    conversation.append({"role":"assistant", "content": response})
+    contentOutput = response
 
+    if testBot:
+        with open("test_conversation.txt", "w") as file:
+            for message in conversation:
+                file.write(f"{message['role']}: {message['content']}\n")
 
+    else:
+        with open("conversation.txt", "w") as file:
+            for message in conversation:
+                file.write(f"{message['role']}: {message['content']}\n")
