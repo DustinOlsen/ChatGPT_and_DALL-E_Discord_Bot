@@ -41,24 +41,6 @@ def format_command(signal, user_command):
         command_args = split_str[1]
         return command_args
 
-# async def handle_command(command):
-#     if command.startswith('test'):
-#         # Handle test command
-#         print("Test command")
-#
-#     elif command.startswith('exit'):
-#         # Handle exit command
-#         print("Exiting...")
-#         await client.close()
-#
-#     else:
-#         print("Unknown command")
-
-# def handle_input():
-#     while True:
-#         command = input("Enter command: ")
-#         asyncio.run(handle_command(command))
-
 @client.event
 async def on_ready():
     print(f'{client.user} has connected to Discord!')
@@ -87,11 +69,5 @@ async def on_message(message):
         API.gptCall(vega_commnand)
         await message.channel.send(API.contentOutput)
 
-
-
-# if __name__ == '__main__':
-#     # Start a new thread to handle command line input
-#     input_thread = threading.Thread(target=handle_input)
-#     input_thread.start()
 
 client.run(TOKEN)

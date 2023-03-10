@@ -15,7 +15,7 @@ conversation = [
 
 
 def gptCall(chatInput):
-    global contentOutput
+    global content_output
     global conversation
 
     # messages = conversation + [{"role": "user", "content": chatInput}]
@@ -29,10 +29,10 @@ def gptCall(chatInput):
     response = completion.choices[0].message.content
     print(response)
 
-    contentOutput = completion.choices[0].message.content
+    content_output = completion.choices[0].message.content
 
     conversation.append({"role":"assistant", "content": response})
-    contentOutput = response
+    content_output = response
 
     if testBot:
         with open("test_conversation.txt", "w") as file:
