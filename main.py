@@ -67,7 +67,7 @@ async def on_message(message):
         input_str = message.content
         vega_commnand = format_command('$V', message.content)
         API.gptCall(vega_commnand)
-        await message.channel.send(API.contentOutput)
+        await message.channel.send(API.content_output)
 
 
 client.run(TOKEN)
