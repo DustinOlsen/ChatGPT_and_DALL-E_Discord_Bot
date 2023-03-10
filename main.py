@@ -54,10 +54,10 @@ def format_command(signal, user_command):
 #     else:
 #         print("Unknown command")
 
-def handle_input():
-    while True:
-        command = input("Enter command: ")
-        asyncio.run(handle_command(command))
+# def handle_input():
+#     while True:
+#         command = input("Enter command: ")
+#         asyncio.run(handle_command(command))
 
 @client.event
 async def on_ready():
@@ -69,21 +69,7 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    if message.content.startswith('$ Hello'):
-        await message.channel.send("Hello, I am VEGA")
-
-    if message.content.startswith('$TEST'):
-        testPrompt = "Snoop Dogg riding a horse"
-        imageBot.dalleCall(testPrompt)
-
-        await message.channel.send(testPrompt)
-        await message.channel.send(imageBot.image_url)
-
-
-    if message.content.startswith('$$'):
-        testPost = format_command('$$', message.content)
-        print(testPost)
-
+    # DALL-E
     if message.content.startswith('$D '):
         input_str = message.content
         dalle_command = format_command('$D', message.content)
@@ -94,18 +80,12 @@ async def on_message(message):
         await message.channel.send(dalle_command)
         await message.channel.send(imageBot.image_url)
 
+    # ChatGPT through VEGA
     if message.content.startswith('$V '):
         input_str = message.content
-
-        # Split the input string at '$VEGA', limiting the split to one occurrence
-        split_str = input_str.split("$V", 1)
-
-        # Check if the split was successful and store the second part in a new variable
-        if len(split_str) > 1:
-            command_args = split_str[1]
-            print(f"The command arguments are: {command_args}")
-            API.gptCall(command_args)
-            await message.channel.send(API.contentOutput)
+        vega_commnand = format_command('$V', message.content)
+        API.gptCall(vega_commnand)
+        await message.channel.send(API.contentOutput)
 
 
 

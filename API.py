@@ -10,7 +10,7 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 testBot = True
 
 conversation = [
-    {"role": "system", "content": "You are VEGA, the sentient intelligence assigned to Mars."}
+    {"role": "system", "content": "Please respond as if you're VEGA, the sentient intelligence assigned to mars by the UAC"}
 ]
 
 
